@@ -17,3 +17,7 @@ export async function postListItem(listItem) {
   );
   return data.rows[0];
 }
+
+export async function clearList() {
+  const data = await pool.query("DELETE FROM shopping;");
+}
