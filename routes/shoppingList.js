@@ -3,6 +3,7 @@ import {
   getShoppingList,
   postListItem,
   clearList,
+  markItem,
 } from "../models/shoppingList.js";
 
 const router = express.Router();
@@ -22,6 +23,11 @@ router.post("/", async (req, res) => {
 router.delete("/", async (req, res) => {
   await clearList();
   res.json({ success: true });
+});
+
+router.patch("/:id", async (req, res) => {
+  const result = await markItem(req.params.id, req.body);
+  res.json({ success: true, payload: result });
 });
 
 export default router;

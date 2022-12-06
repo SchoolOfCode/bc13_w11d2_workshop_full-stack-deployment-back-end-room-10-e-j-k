@@ -21,3 +21,11 @@ export async function postListItem(listItem) {
 export async function clearList() {
   const data = await pool.query("DELETE FROM shopping;");
 }
+
+export async function markItem(id, body) {
+  const data = await pool.query(
+    "UPDATE shopping SET completed = $1 WHERE id = $2 RETURNING *;",
+    [body.marked, id]
+  );
+  return data.rows[0];
+}
